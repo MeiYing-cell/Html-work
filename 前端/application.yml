@@ -1,0 +1,71 @@
+
+spring:
+  # 连接数据库
+  application:
+    name: take_out
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_reggie?serverTimezone=UTC
+    #自动生成的用户名和密码多了个data  是错误的 会出现没有访问数据库权限
+    #    data-username: root
+    #    data_password: 1234
+    username: root
+    password: zb20020802
+
+  # qq邮箱验证码配置
+  mail:
+    # 配置 SMTP 服务器地址
+    host: smtp.qq.com
+    # 发送者邮箱
+    username: 3285750243@qq.com
+    # 配置密码，注意不是真正的密码，而是刚刚申请到的授权码
+    password: sentxtkbxgqtchbc
+    # 端口号465或587
+    port: 465
+    # 默认的邮件编码为UTF-8
+    default-encoding: UTF-8
+    # 配置SSL 加密工厂
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+          socketFactoryClass: javax.net.ssl.SSLSocketFactory
+        #表示开启 DEBUG 模式，这样，邮件发送过程的日志会在控制台打印出来，方便排查错误
+        debug: true
+
+  # Redis数据库相关配置
+  redis:
+    host: localhost
+    port: 6379
+    database: 0 #操作的是0号数据库
+    jedis:
+      #Redis练级池配置
+      pool:
+        max-active: 8 #最大连接数
+        max-wait: 1ms #连接池最大阻塞等待时间
+        max-idle: 4   #连接池中最大空闲连接
+        min-idle: 0   #连接池中最小空闲连接
+
+#服务端口
+server:
+  port: 8080
+
+#全局配置数据库映射和主键自增问题
+mybatis-plus:
+  configuration:
+    #在映射实体或属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      #主键自增
+      id-type: assign_id
+
+#文件上传指定位置
+shangchuan:
+  path: D:\
+
+
+
+
+
